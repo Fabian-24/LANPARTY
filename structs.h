@@ -120,11 +120,18 @@ int process_task_1_2_and_a(char* t1, char* t2, struct Elem** teams, int nr, FILE
 /*Functie prin care rezolvam exercitiul 3*/
 void process_team_pair(Node* team1, Node* team2, FILE* output, Stack* win_stack, Stack* lose_stack);
 
+
 /*Functie prin care adaugam castigatorii in stiva si ii scriem in fisier*/
 void process_winner(Node* node_aux, int a, FILE* output, struct Elem** top9, Queue* queue);
 
 /*Functie prin care procesam rundele*/
 void process_round(FILE* output, Queue* queue, Stack* win_stack, Stack* lose_stack, struct Elem** top9, int* a);
+
+void freeLinkedList(struct Elem* head);
+
+void freeQueue(Queue* queue);
+
+void freeStack(Stack* stack);
 
 
 

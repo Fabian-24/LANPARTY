@@ -162,3 +162,27 @@ int queueSize(Queue* queue) {
     }
     return size;
 }
+
+void freeQueue(Queue* queue) {
+    while (!isEmptyQueue(queue)) {
+        dequeue(queue);
+    }
+}
+
+void freeStack(Stack* stack) {
+    while (!isEmptyStack(stack)) {
+        pop(stack);
+    }
+}
+
+void freeLinkedList(struct Elem* head) {
+    struct Elem* current = head;
+    struct Elem* next;
+
+    while (current != NULL) {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+}
+

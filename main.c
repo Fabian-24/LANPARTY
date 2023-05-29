@@ -52,6 +52,12 @@ int main(int argc, char** argv){
     }
 
     /*Inchidem fisierele*/
+
+    freeLinkedList(teams);
+    freeLinkedList(top9);
+    freeStack(&win_stack);
+    freeStack(&lose_stack);
+    freeQueue(&queue);
         
     fclose(tasks);
     fclose(output);

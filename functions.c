@@ -148,7 +148,7 @@ void process_round(FILE* output, Queue* queue, Stack* win_stack, Stack* lose_sta
             Node* team2 = dequeue(queue);
             process_team_pair(team1, team2, output, win_stack, lose_stack); // aflam castigatorul
         }
-        while (!isEmptyStack(lose_stack)) { //golim lista de invinsi
+        while (!isEmptyStack(lose_stack)) { //golim stiva de invinsi
             pop(lose_stack);
         }
         *a /= 2; // jumatate au castigat, jumatate au pierdut, deci jucatorii s-au injumatatit

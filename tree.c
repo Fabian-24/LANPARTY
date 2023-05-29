@@ -68,3 +68,4 @@ void insertListIntoBST(struct BST* bst, Node* list) {
         current = current->next;
     }
 }
+
