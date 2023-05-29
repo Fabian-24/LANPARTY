@@ -28,6 +28,20 @@ typedef struct Stack {  //structura pentru stiva
     Node* top;
 } Stack;
 
+typedef struct Elem Node;
+
+struct BSTNode {    //structura pentru arborele binar
+    Node* data;
+    struct BSTNode* left;
+    struct BSTNode* right;
+};
+
+typedef struct BSTNode BSTNode;
+
+struct BST {    //structura pentru radacina arborelui binar
+    BSTNode* root;
+};
+
 /*Functie care adauga un nod la inceputul unei liste*/
 void addAtBeginning ( Node ** head, int nr, char* name);
 
@@ -72,6 +86,24 @@ void convertQueueToStack(Queue* queue, Stack* stack);
 
 /*Functie care intoarce dimensiunea unei cozi*/
 int queueSize(Queue* queue);
+
+/*Functie prin care cream un arbore*/
+BSTNode* createBSTNode(Node* data);
+
+/*Functie prin care adaugam un nod unui arbore BSTNode reprezentand radacina*/
+BSTNode* insertBSTNode(BSTNode* root, Node* data);
+
+/*Functie prin care adaugam un nod unui arbore*/
+void insertBST(struct BST* bst, Node* data);
+
+/*Functie prin care traversam un arbore*/
+void inorderTraversal(struct BSTNode* root,FILE* output);
+
+/*Functie prin care traversam un arbore*/
+void printBSTReverseOrder(struct BST* bst,FILE* output);
+
+/*Functie ptrin care adaugam o lista intr-un arbore BST*/
+void insertListIntoBST(struct BST* bst, Node* list);
 
 /*Functie prin care scriem in fisier task-urile 1 sau 2*/
 void print_task_1_2(Node *head,FILE* output);

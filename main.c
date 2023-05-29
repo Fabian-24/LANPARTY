@@ -39,7 +39,20 @@ int main(int argc, char** argv){
     if(strstr(t3,"1") != NULL)
         process_round(output, &queue, &win_stack, &lose_stack, &top9, &remaining_teams);
 
+    /*Pentru task-ul 4, vom initializa structura unui BST*/
+    struct BST bst ;
+    bst.root = NULL;
+
+    /*Inseram toate elementele din top8 in BST*/
+    insertListIntoBST(&bst,top9);
+    /*Daca este nevoite, o vom scrie in fisierul de iesire*/
+    if(strstr(t4,"1") != NULL){
+        fprintf(output,"\nTOP 8 TEAMS:\n");
+        inorderTraversal(bst.root,output);
+    }
+
     /*Inchidem fisierele*/
+        
     fclose(tasks);
     fclose(output);
     fclose(input);

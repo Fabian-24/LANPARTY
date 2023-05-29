@@ -123,7 +123,7 @@ void process_winner(Node* node_aux, int a, FILE* output, struct Elem** top9, Que
     strcpy(aux, node_aux->team_name);   //adaugam in aux numele echipei
     aux[strlen(aux) - 1] = '\0';
 
-    fprintf(output, "%s", aux);     //adaugam numele echipei in fisier
+    fprintf(output, "%s", aux);     //adaugam numeleechipei in fisier
     for (int i = 0; i < (int)(35 - strlen(node_aux->team_name)); i++)
         fprintf(output, " ");
     fprintf(output, "-  ");
