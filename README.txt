@@ -1,28 +1,15 @@
-Mai intai vom citi din fisier. Pe prima linie avem numarul de echipe, il vom lua
-sub forma unui string si il vom trnasforma in integer value (folosind atoi)
-dupa care vom iterade la 1 la numarul de echipe pentru a citi fiecare linie
-In continuare vom avea numarul de jucatori al fiecarei echipe si numele ei,
-pe care le vom citi intr-un buffer, vor fi delimitate si puse in structura de
-date pentru echipa. Vom citi dupa numele si prenumele fiecarui jucatori si
-scorul pe care il are fiecare pen care il vom incrementa la scorul total al
-ehipei. In timp ce citim din fisier toate aceste date sunt bagate in-trun nod 
-si adaugate intr-o lista.
-Task-ul 1 ne cere doar sa afisam numele echipelor inscrise, pe care le vom scrie
-in fisierul r.out iterand prin lista respectiva.
-Pentru task-ul 2 mai intai am calculat cate echipe vor trebui sa participe dupa
-care am facut diferenta dintre numarul de echipe totale si numarul de echipe participante
-Aceasta diferenta reprezinta cate echipe trebuie eliminate. Am facut un for in care
-am aflat de fiecare data minimul din lista dupa care am eliminat acel nod.
-Pentru task-ul 3 mai intai am adaugat echipele intr-o coada, dupa care am facut
-un while in care am scos din cate doua echipe din coada pentru a afla bazat pe scor
-cine castiga. Echipa este adaugata intr-o stiva iar echipa pierzatoare este adaugata
-in alta stiva (echipele castigatoare vor primi cate un punct). Acest rationament se va
-repeta pana cand vom goli coada. Vom elibera stiva cu echipele care au pierdut
-iar echipele castigatoare se vor adauga din nou in coada. Acest rationament se
-termina dupa ce se va juca finala. Atunci cand ne aflam in optimi, dorim sa stocam
-aceste echipe intr-o lista pentru a reusi sa efectuam task-ul 4
-La task-ul 4 vom adauga lista pe care am salvat-o la task-ul precedent intr-un
-arbore BST dupa care vom afisa acest arbore in postordine pentru a afisa echipele
-cu scorul cat mai mare. Fata de un arbore BST normal,, pe langa comparatia scorurilor
-am adaugat si comparatia de nume.
-Consider ca tema este utila, mai ales pentru faptul ca reprezinta o aprofundare a cunostintelor despre liste, stive, cozi si arbori de cautare.
+Mai întâi vom citi din fișier. Pe prima linie avem numărul de echipe, pe care îl vom lua sub formă de string și îl vom transforma într-un număr întreg folosind funcția "atoi". Apoi, vom itera de la 1 la numărul de echipe pentru a citi fiecare linie.
+
+În continuare, vom avea numărul de jucători al fiecărei echipe și numele ei, pe care le vom citi într-un buffer. Acestea vor fi delimitate și puse într-o structură de date pentru echipă. Vom citi apoi numele și prenumele fiecărui jucător și scorul pe care îl are fiecare, pe care îl vom adăuga la scorul total al echipei. Pe măsură ce citim din fișier, toate aceste date sunt introduse într-un nod și adăugate într-o listă.
+
+Task-ul 1 ne cere doar să afișăm numele echipelor înscrise, pe care le vom scrie în fișierul "r.out" iterând prin respectiva listă.
+
+Pentru task-ul 2, mai întâi am calculat câte echipe vor trebui să participe, după care am făcut diferența dintre numărul total de echipe și numărul de echipe participante. Această diferență reprezintă numărul de echipe care trebuie eliminate. Am utilizat un for în care am aflat de fiecare dată minimul din listă, după care am eliminat acel nod.
+
+Pentru task-ul 3, mai întâi am adăugat echipele într-o coadă, după care am utilizat un while în care am scos câte două echipe din coadă pentru a afla, bazat pe scor, cine câștigă. Echipa câștigătoare este adăugată într-o stivă, iar echipa învinsă este adăugată într-o altă stivă (echipele câștigătoare vor primi câte un punct). Acest proces se va repeta până când coada va fi goală. Vom elibera stiva cu echipele care au pierdut, iar echipele câștigătoare se vor adăuga din nou în coadă. Acest proces se termină după ce se va juca finala. 
+
+Atunci când ne aflăm în optimi, dorim să stocăm aceste echipe într-o listă pentru a reuși să efectuăm task-ul 4.
+
+La task-ul 4, vom adăuga lista pe care am salvat-o în task-ul precedent într-un arbore BST, după care vom afișa acest arbore în postordine pentru a afișa echipele cu scorul cel mai mare. În comparație cu un arbore BST normal, pe lângă comparația scorurilor, am adăugat și comparația numelor.
+
+Consider că tema este utilă, mai ales pentru faptul că reprezintă o aprofundare a cunoștințelor despre liste, stive, cozi și arbori de căutare.
