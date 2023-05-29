@@ -65,3 +65,100 @@ void delete(Node** head, int v) {
         }
     }
 }
+
+void initializeQueue(Queue* queue) {
+    queue->front = NULL;
+    queue->rear = NULL;
+}
+
+int isEmptyQueue(Queue* queue) {
+    return queue->front == NULL;
+}
+
+void enqueue(Queue* queue, Node* element) {
+    element->next = NULL;
+
+    if (isEmptyQueue(queue)) {
+        queue->front = element;
+        queue->rear = element;
+    } else {
+        queue->rear->next = element;
+        queue->rear = element;
+    }
+}
+
+Node* dequeue(Queue* queue) {
+    if (isEmptyQueue(queue)) {
+        printf("Queue is empty.\n");
+        return NULL; // Or you can define an error code or use assertions.
+    }
+
+    Node* temp = queue->front;
+    if (queue->front == queue->rear) {
+        queue->front = NULL;
+        queue->rear = NULL;
+    } else {
+        queue->front = queue->front->next;
+    }
+
+    return temp;
+}
+
+void convertListToQueue(Node* head, Queue* queue) {
+    Node* current = head;
+    while (current != NULL) {
+        //alocam un nod nod caruia ii atribum valorile din nodul listei
+        Node* newNode = (Node*)malloc(sizeof(Node));
+        newNode->count_players = current->count_players;
+        newNode->team_name = current->team_name;
+        newNode->score = current->score;
+        newNode->players = current->players;
+        newNode->next = NULL;
+        //adaugam nodul nou creat in coada
+        enqueue(queue, newNode);
+        //iteram pana la sfarsitul listei
+        current = current->next;
+    }
+}
+
+void initializeStack(Stack* stack) {
+    stack->top = NULL;
+}
+
+int isEmptyStack(Stack* stack) {
+    return stack->top == NULL;
+}
+
+void push(Stack* stack, Node* element) {
+    element->next = stack->top;
+    stack->top = element;
+}
+
+Node* pop(Stack* stack) {
+    if (isEmptyStack(stack)) {
+        printf("Stack is empty.\n");
+        return NULL;
+    }
+
+    Node* temp = stack->top;
+    stack->top = stack->top->next;
+    return temp;
+}
+
+void convertQueueToStack(Queue* queue, Stack* stack) {
+    while (!isEmptyQueue(queue)) {
+        Node* dequeuedItem = dequeue(queue);
+        push(stack, dequeuedItem);
+    }
+}
+
+int queueSize(Queue* queue) {
+    int size = 0;
+    Node* current = queue->front;
+
+    while (current != NULL) {
+        size++;
+        current = current->next;
+    }
+    return size;
+}

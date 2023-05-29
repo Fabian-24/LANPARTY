@@ -91,3 +91,74 @@ int process_task_1_2_and_a(char* t1, char* t2, struct Elem** teams, int nr, FILE
 
     return numer_teams_fight;
 }
+
+void process_team_pair(Node* team1, Node* team2, FILE* output, Stack* win_stack, Stack* lose_stack) {
+    char aux1[50]; //in aux 1 si aux 2 vom tine numele echipelor
+    char aux2[50];
+    strcpy(aux1, team1->team_name);
+    strcpy(aux2, team2->team_name);
+    aux1[strlen(aux1) - 1] = '\0';
+    aux2[strlen(aux2) - 1] = '\0';
+    fprintf(output, "%s", aux1); //afisam numele primei echipe
+    for (int i = 0; i < (int)(33 - strlen(aux1)); i++) //pentru a avea acelasi output va trebui sa punem mai multe spatii
+        fprintf(output, " ");
+    fprintf(output, "-"); 
+    for (int i = 0; i < (int)(33 - strlen(aux2)); i++)  //pentru a avea acelasi output va trebui sa punem mai multe spatii
+        fprintf(output, " ");
+    fprintf(output, "%s\n", aux2); //afisam cel de al doilea nume
+
+    if (team1->score > team2->score) { //daca prima echipa castica ii crestem scorul si o adaugam in stiva de castigatori
+        team1->score = team1->score + team1->count_players;
+        push(win_stack, team1);
+        push(lose_stack, team2);
+    } else {    //daca a doua echipa castica ii crestem scorul si o adaugam in stiva de castigatori
+        team2->score = team2->score + team2->count_players;
+        push(win_stack, team2);
+        push(lose_stack, team1);
+    }
+}
+
+void process_winner(Node* node_aux, int a, FILE* output, struct Elem** top9, Queue* queue) {
+    char aux[50];
+    strcpy(aux, node_aux->team_name);   //adaugam in aux numele echipei
+    aux[strlen(aux) - 1] = '\0';
+
+    fprintf(output, "%s", aux);     //adaugam numele echipei in fisier
+    for (int i = 0; i < (int)(35 - strlen(node_aux->team_name)); i++)
+        fprintf(output, " ");
+    fprintf(output, "-  ");
+    fprintf(output, "%.2f\n", (float)node_aux->score / (float)node_aux->count_players);     //adaugam scorul in fisier
+
+    if (a == 8) {
+        addAtBeginningMod(top9, node_aux);  //daca a este 8 (afica am ajuns in optimi), atunci dorim sa stocam cele 8 echipe intr-o lista
+    }
+    enqueue(queue, node_aux); //adaugam ecjipele castigatoare in coada
+}
+
+void process_round(FILE* output, Queue* queue, Stack* win_stack, Stack* lose_stack, struct Elem** top9, int* a) {
+    int i = 1;
+    fprintf(output, "\n");
+    while (queueSize(queue) != 0) {
+        if (*a == 1) { //daca am ajuns la sfarsit, dorim sa iesim din while
+            break;
+        }
+        fprintf(output, "--- ROUND NO:%d\n", i); //adaugam numarul rundei care se joaca
+        while (!isEmptyQueue(queue)) {
+            Node* team1 = dequeue(queue); //scoatem cate doua echipe
+            Node* team2 = dequeue(queue);
+            process_team_pair(team1, team2, output, win_stack, lose_stack); // aflam castigatorul
+        }
+        while (!isEmptyStack(lose_stack)) { //golim lista de invinsi
+            pop(lose_stack);
+        }
+        *a /= 2; // jumatate au castigat, jumatate au pierdut, deci jucatorii s-au injumatatit
+        fprintf(output, "\nWINNERS OF ROUND NO:%d\n", i);
+        while (!isEmptyStack(win_stack)) { //adaugam echipele castigatoare din runda respectiva in fisier si in coada
+            Node* node_aux = pop(win_stack);
+            process_winner(node_aux, *a, output, top9, queue);
+        }
+        i++;
+        if (*a != 1) //intre runde, vom avem o spatiu delimitator
+            fprintf(output, "\n");
+    }
+}

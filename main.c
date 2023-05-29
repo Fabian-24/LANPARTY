@@ -24,7 +24,22 @@ int main(int argc, char** argv){
     int nr = read_teams_from_input(input,&teams);
     /*afisam tasks-urile 1 sau 2*/ 
     int remaining_teams = process_task_1_2_and_a(t1, t2, &teams, nr, output);
-        
+
+    /*Ne vom initializa doua stive si o coada pentru realizarea task-ului 3*/
+    Queue queue;
+    Stack lose_stack,win_stack;
+    initializeStack(&lose_stack);
+    initializeStack(&win_stack);
+    queue.front = NULL;
+    queue.rear = NULL;
+    /*La inceput. toate echipele (cele de la task-ul 2) se vor afla in coada*/
+    convertListToQueue(teams,&queue);
+
+    /*Daca trebuie sa efectuam task-ul 3 atunci il vom prelucra*/
+    if(strstr(t3,"1") != NULL)
+        process_round(output, &queue, &win_stack, &lose_stack, &top9, &remaining_teams);
+
+    /*Inchidem fisierele*/
     fclose(tasks);
     fclose(output);
     fclose(input);
